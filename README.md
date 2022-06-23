@@ -1,1 +1,5 @@
-# CRUD NodeJs com Express, Prisma e Typescript
+# CRUD NodeJs com Express
+
+## ORM Prisma
+## Typescript
+## Autenticação JWT
