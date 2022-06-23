@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import UserController from './controller/UserController';
 import PostController from './controller/PostController';
+import AuthController from './controller/AuthController';
 
 const router = Router();
 
@@ -17,5 +18,8 @@ router.get('/posts', PostController.findAll);
 router.get('/post/:id', PostController.findById);
 router.put('/post/:id', PostController.update);
 router.delete('/post/:id', PostController.delete);
+
+// Auth route
+router.post('/auth', AuthController.authenticate);
 
 export default router;

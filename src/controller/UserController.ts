@@ -1,22 +1,30 @@
+import { hash } from 'bcryptjs';
 import { Request, Response } from 'express';
 import { prisma } from '../utils/prisma';
 
 
 export default {
     async create(req: Request, res: Response) {
-        const { name, email } = req.body;
+        const { name, email, password } = req.body;
         let user = await prisma.user.findUnique({ where: { email } });
 
         try {
             if (user) {
-                return res.json({ error: 'Ops! Email already registered in the database' });
+                return res.json({ error: 'Email already registered in the database' });
             }
+
+            if (password.length < 6) {
+                return res.json({ error: 'Password must be at least 6 characters' });
+            }
+
+            const passwordHash = await hash(password, 16); // senha padrão: 123456
 
             user = await prisma.user.create({
                 data: {
                     name,
-                    email
-                },
+                    email,
+                    password: passwordHash
+                }
             });
 
             return res.json(user);
@@ -43,7 +51,7 @@ export default {
 
         try {
             if (!user) {
-                return res.json({ error: 'Ops! User not found.' });
+                return res.json({ error: 'User not found.' });
             }
 
             return res.json(user);
@@ -60,7 +68,7 @@ export default {
 
         try {
             if (!user) {
-                return res.json({ error: 'Ops! User not found.' });
+                return res.json({ error: 'User not found.' });
             }
 
             user = await prisma.user.update({
@@ -81,7 +89,7 @@ export default {
 
         try {
             if (!user) {
-                res.json({ error: 'Ops! User not found.' });
+                res.json({ error: 'User not found.' });
             }
 
             await prisma.user.delete({ where: { id: +id } });
