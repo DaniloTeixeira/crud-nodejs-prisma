@@ -1,2 +1,1 @@
-# crud-nodejs-prisma
-CRUD com NodeJS e ORM Prisma
+# CRUD NodeJs com Express, Prisma e Typescript
