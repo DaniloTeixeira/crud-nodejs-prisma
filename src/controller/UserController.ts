@@ -4,10 +4,10 @@ import { prisma } from '../utils/prisma';
 
 export default {
     async create(req: Request, res: Response) {
-        try {
-            const { name, email } = req.body;
-            let user = await prisma.user.findUnique({ where: { email } });
+        const { name, email } = req.body;
+        let user = await prisma.user.findUnique({ where: { email } });
 
+        try {
             if (user) {
                 return res.json({ error: 'Ops! Email already registered in the database' });
             }
@@ -27,9 +27,9 @@ export default {
     },
 
     async findAll(req: Request, res: Response) {
-        try {
-            const users = await prisma.user.findMany();
+        const users = await prisma.user.findMany();
 
+        try {
             return res.json(users);
 
         } catch (error) {
@@ -38,10 +38,10 @@ export default {
     },
 
     async findById(req: Request, res: Response) {
-        try {
-            const { id } = req.params;
-            const user = await prisma.user.findUnique({ where: { id: +id } });
+        const { id } = req.params;
+        const user = await prisma.user.findUnique({ where: { id: +id } });
 
+        try {
             if (!user) {
                 return res.json({ error: 'Ops! User not found.' });
             }
@@ -54,11 +54,11 @@ export default {
     },
 
     async update(req: Request, res: Response) {
-        try {
-            const { id } = req.params;
-            const { name, email } = req.body;
-            let user = await prisma.user.findUnique({ where: { id: +id } });
+        const { id } = req.params;
+        const { name, email } = req.body;
+        let user = await prisma.user.findUnique({ where: { id: +id } });
 
+        try {
             if (!user) {
                 return res.json({ error: 'Ops! User not found.' });
             }
@@ -76,17 +76,17 @@ export default {
     },
 
     async delete(req: Request, res: Response) {
-        try {
-            const { id } = req.params;
-            const user = await prisma.user.findUnique({ where: { id: +id } });
+        const { id } = req.params;
+        const user = await prisma.user.findUnique({ where: { id: +id } });
 
+        try {
             if (!user) {
                 res.json({ error: 'Ops! User not found.' });
             }
 
             await prisma.user.delete({ where: { id: +id } });
 
-            return res.json({ message: 'Success! User deleted.' });
+            return res.json({ message: 'User successfully deleted.' });
 
         } catch (error) {
             res.json({ error });
