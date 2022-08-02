@@ -9,7 +9,7 @@ export default {
 
         try {
             if (!user) {
-                return res.json({ error: 'User not found.' });
+                return res.json({ error: 'Usuário não encontrado.' });
             }
 
             const post = await prisma.post.create({
@@ -41,7 +41,7 @@ export default {
 
         try {
             if (!post) {
-                return res.json({ error: 'Post not found.' });
+                return res.json({ error: 'Postagem não encontrada.' });
             }
 
             return res.json(post);
@@ -57,7 +57,7 @@ export default {
 
         try {
             if (!post) {
-                return res.json({ error: 'Post not found.' });
+                return res.json({ error: 'Postagem não encontrada.' });
             }
 
             await prisma.post.update({
@@ -65,7 +65,7 @@ export default {
                 data: { content }
             });
 
-            return res.json({ message: 'Post updated.' });
+            return res.json({ message: 'Postagem atualizada com sucesso!' });
 
         } catch (error) {
             res.json({ error });
@@ -79,12 +79,12 @@ export default {
 
         try {
             if (!post) {
-                return res.json({ error: 'Post not found.' });
+                return res.json({ error: 'Postagem não encontrada.' });
             }
 
             await prisma.post.delete({ where: { id: +id } });
 
-            return res.json({ message: 'Post successfully deleted.' });
+            return res.json({ message: 'Postagem deletada com suceso!' });
 
         } catch (error) {
             res.json({ error });

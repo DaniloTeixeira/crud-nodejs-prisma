@@ -10,11 +10,11 @@ export default {
 
         try {
             if (user) {
-                return res.json({ error: 'Email already registered in the database' });
+                return res.json({ error: 'Usuário já cadastrado.' });
             }
 
             if (password.length < 6) {
-                return res.json({ error: 'Password must be at least 6 characters' });
+                return res.json({ error: 'A senha deve conter ao menos 6 caracteres.' });
             }
 
             const passwordHash = await hash(password, 16); // senha padrão: 123456
@@ -27,7 +27,7 @@ export default {
                 }
             });
 
-            return res.json(user);
+            return res.json('Usuário criado com sucesso!');
 
         } catch (error) {
             res.json({ error });
@@ -51,7 +51,7 @@ export default {
 
         try {
             if (!user) {
-                return res.json({ error: 'User not found.' });
+                return res.json({ error: 'Usuário não encontrado.' });
             }
 
             return res.json(user);
@@ -68,7 +68,7 @@ export default {
 
         try {
             if (!user) {
-                return res.json({ error: 'User not found.' });
+                return res.json({ error: 'Usuário não encontrado.' });
             }
 
             user = await prisma.user.update({
@@ -89,12 +89,12 @@ export default {
 
         try {
             if (!user) {
-                res.json({ error: 'User not found.' });
+                res.json({ error: 'Usuário não encontrado.' });
             }
 
             await prisma.user.delete({ where: { id: +id } });
 
-            return res.json({ message: 'User successfully deleted.' });
+            return res.json({ message: 'Usuário deletado com sucesso!' });
 
         } catch (error) {
             res.json({ error });

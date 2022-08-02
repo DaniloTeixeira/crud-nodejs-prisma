@@ -10,14 +10,14 @@ export default {
 
         try {
             if (!user) {
-                return res.json({ error: 'User not found.' });
+                return res.json({ error: 'Usuário não encontrado.' });
             }
 
             const isEmailMatch = await email === user.email;
             const isPasswordMatch = await compare(password, user.password);
 
             if (!isEmailMatch || !isPasswordMatch) {
-                return res.json({ error: 'Invalid e-mail or password' });
+                return res.json({ error: 'E-mail ou senha inválidos' });
             }
 
             const secret = String(process.env.SECRET);
