@@ -5,7 +5,7 @@ import { prisma } from '../utils/prisma';
 
 export default {
     async create(req: Request, res: Response) {
-        const { name, email, password } = req.body;
+        const { name, email, password, accessType } = req.body;
         let user = await prisma.user.findUnique({ where: { email } });
 
         try {
@@ -23,7 +23,8 @@ export default {
                 data: {
                     name,
                     email,
-                    password: passwordHash
+                    password: passwordHash,
+                    accessType
                 }
             });
 
