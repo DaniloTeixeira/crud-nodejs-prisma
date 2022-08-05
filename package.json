@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node --files  src/server.ts"
+    "dev": "ts-node-dev --respawn --transpile-only --files src/server.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/cors": "^2.8.12",
     "@types/node": "^18.0.0",
     "nodemon": "^2.0.19",
     "prisma": "^3.15.2",

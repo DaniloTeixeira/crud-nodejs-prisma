@@ -8,4 +8,4 @@ app.use(express.json());
 app.use(CORSErrorMiddleware);
 app.use(router);
 
-app.listen(3333, () => console.log('Server listening at port 3333'));
+app.listen(3333, () => console.log('Server listening at http://localhost:3333'));
