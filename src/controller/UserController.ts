@@ -28,7 +28,7 @@ export default {
                 }
             });
 
-            return res.json('Usuário criado com sucesso!');
+            return res.json(user);
 
         } catch (error) {
             res.json({ error });
