@@ -15,7 +15,7 @@ router.put('/user/:id', UserController.update);
 router.delete('/user/:id', UserController.delete);
 
 // Post routes
-router.post('/post/create-post/user/:id', PostController.create);
+router.post('/post/create-post/userId/:id', PostController.create);
 router.get('/posts', PostController.findAll);
 router.get('/post/:id', PostController.findById);
 router.put('/post/:id', PostController.update);

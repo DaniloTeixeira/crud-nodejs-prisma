@@ -25,7 +25,9 @@ export default {
     },
 
     async findAll(req: Request, res: Response) {
-        const posts = await prisma.post.findMany();
+        const posts = await prisma.post.findMany({
+            include: { author: true }
+        });
 
         try {
             return res.json(posts);
@@ -52,15 +54,16 @@ export default {
     },
 
     async update(req: Request, res: Response) {
-        const { id, content } = req.params;
-        const post = await prisma.post.findUnique({ where: { id: +id } });
+        const { id } = req.params;
+        const { content } = req.body;
+        let post = await prisma.post.findUnique({ where: { id: +id } });
 
         try {
             if (!post) {
                 return res.json({ error: 'Postagem não encontrada.' });
             }
 
-            await prisma.post.update({
+           post = await prisma.post.update({
                 where: { id: +id },
                 data: { content }
             });
